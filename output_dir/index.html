@@ -67,6 +67,32 @@
             alert('Warning: This file must be served by an HTTP server to function correctly.');
         }
     </script>
+
+    <script>
+      function removeGridItemStyle() {
+        document
+          .querySelectorAll(
+            '.react-grid-item.cssTransforms.react-resizable-hide.react-resizable'
+          )
+          .forEach(el => {
+            el.removeAttribute('style');
+          });
+      }
+
+      // Run once in case it's already rendered
+      removeGridItemStyle();
+
+      // Observe future DOM changes
+      const observer = new MutationObserver(() => {
+        removeGridItemStyle();
+      });
+
+      observer.observe(document.getElementById('root'), {
+        childList: true,
+        subtree: true
+      });
+    </script>
+
     
     <style>
         #save-button {
